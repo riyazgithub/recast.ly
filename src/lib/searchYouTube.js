@@ -8,7 +8,6 @@ var searchYouTube = (options, callback) => {
   $.ajax({
     url: url,
     success: function(data) {
-      console.log(data);
       callback(data.items);
     }
   });
