@@ -1,21 +1,16 @@
-var VideoList = () => (
+var VideoList = (props) => (
   <div className="video-list media">
-    <VideoListEntry />
-    <VideoListEntry />
-    <VideoListEntry />
-    <VideoListEntry />
-    <VideoListEntry />
-    <VideoListEntry />
-    <VideoListEntry />
-    <VideoListEntry />
-    <VideoListEntry />
+    {props.videos.map( (video, index) => (
+      <VideoListEntry video={video} handleClick={props.handleClick.bind(this, index)} />
+      ))}
   </div>
 );
 
 // PropTypes tell other developers what `props` a component expects
 // Warnings will be shown in the console when the defined rules are violated
 VideoList.propTypes = {
-  videos: React.PropTypes.array.isRequired
+  videos: React.PropTypes.array.isRequired,
+  handleClick: React.PropTypes.func.isRequired
 };
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope.
