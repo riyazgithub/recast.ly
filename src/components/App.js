@@ -81,7 +81,7 @@ class App extends React.Component {
 
     var options = {
       max: 5,
-      key: window.YOUTUBE_API_KEY,
+      key: YOUTUBE_API_KEY,
       query: val
     };
 
