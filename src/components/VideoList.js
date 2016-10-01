@@ -1,10 +1,13 @@
 import React from 'react';
 import VideoListEntry from './VideoListEntry';
+import {Link} from 'react-router';
 
 var VideoList = (props) => (
   <div className="video-list media">
     {props.videos.map( (video, index) => (
-      <VideoListEntry video={video} handleClick={props.handleClick.bind(this, index)} key={video.id.videoId} />
+      <Link to={`/videos/${index}`} key={video.id.videoId} >
+        <VideoListEntry video={video} handleClick={props.handleClick.bind(this, index)} key={video.id.videoId} />
+      </Link>
     ))}
   </div>
 );

@@ -6,6 +6,7 @@ import VideoPlayer from './VideoPlayer';
 import VideoList from './VideoList';
 
 
+
 import YOUTUBE_API_KEY from '../config/youtube';
 // pull Nav from this folder
 
@@ -13,7 +14,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    
     this.state = {
       activeIndex: 0,
       videos: [{
@@ -62,9 +62,18 @@ class App extends React.Component {
       query: 'react'
     };
 
-    this.props.searchYouTube(options, videos => {
+    searchYouTube(options, videos => {
+      var activeIndex;
+
+      if (this.props.params.videoIndex < videos.length) {
+        activeIndex = this.props.params.videoIndex;
+      } else {
+        activeIndex = 0;
+      }
+
       this.setState({
-        videos
+        videos,
+        activeIndex
       });
     });
 
@@ -85,7 +94,7 @@ class App extends React.Component {
       query: val
     };
 
-    var debouncedSearch = _.debounce(this.props.searchYouTube, 1, { leading: true });
+    var debouncedSearch = _.debounce(searchYouTube, 1, { leading: true });
 
     debouncedSearch(options, videos => {
       this.setState({
@@ -118,7 +127,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  searchYouTube: React.PropTypes.func.isRequired
+  // searchYouTube: React.PropTypes.func.isRequired
 };
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope
