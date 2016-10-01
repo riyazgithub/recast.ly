@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 var searchYouTube = (options, callback) => {
   var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet';
   url += `&key=${options.key}`;
@@ -13,4 +15,4 @@ var searchYouTube = (options, callback) => {
   });
 };
 
-window.searchYouTube = searchYouTube;
+export default searchYouTube;

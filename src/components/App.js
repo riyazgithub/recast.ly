@@ -1,3 +1,14 @@
+import Nav from './Nav';
+import React from 'react';
+import searchYouTube from '../lib/searchYouTube';
+import _ from 'lodash';
+import VideoPlayer from './VideoPlayer';
+import VideoList from './VideoList';
+
+
+import YOUTUBE_API_KEY from '../config/youtube';
+// pull Nav from this folder
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -47,7 +58,7 @@ class App extends React.Component {
   componentDidMount() {
     var options = {
       max: 5,
-      key: window.YOUTUBE_API_KEY,
+      key: YOUTUBE_API_KEY,
       query: 'react'
     };
 
@@ -112,4 +123,4 @@ App.propTypes = {
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
-window.App = App;
+export default App;
