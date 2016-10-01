@@ -2,7 +2,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleClick = this.handleClick.bind(this);
+    
     this.state = {
       activeIndex: 0,
       videos: [{
@@ -39,6 +39,9 @@ class App extends React.Component {
         }
       }]
     };
+
+    this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -52,7 +55,6 @@ class App extends React.Component {
       this.setState({
         videos
       });
-
     });
 
   }
@@ -61,13 +63,31 @@ class App extends React.Component {
     this.setState({
       activeIndex: index
     });
-  }  
+  }
+
+  handleChange(event) {
+    var val = event.target.value;
+
+    var options = {
+      max: 5,
+      key: window.YOUTUBE_API_KEY,
+      query: val
+    };
+
+    var debouncedSearch = _.debounce(this.props.searchYouTube, 1);
+
+    debouncedSearch(options, videos => {
+      this.setState({
+        videos
+      });
+    });
+  }
 
   render() {
     if (this.state.videos.length > 0) {
       return (
         <div>
-          <Nav />
+          <Nav handleChange={this.handleChange} />
           <div className="col-md-7">
             <VideoPlayer video={this.state.videos[this.state.activeIndex]} />
           </div>
@@ -77,6 +97,7 @@ class App extends React.Component {
         </div>
       );        
     } else {
+      console.log('Loading phase');
       return (
         <div> Loading .... </div>
         );
