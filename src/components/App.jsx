@@ -74,7 +74,7 @@ class App extends React.Component {
       query: val
     };
 
-    var debouncedSearch = _.debounce(this.props.searchYouTube, 1);
+    var debouncedSearch = _.debounce(this.props.searchYouTube, 1, { leading: true });
 
     debouncedSearch(options, videos => {
       this.setState({
